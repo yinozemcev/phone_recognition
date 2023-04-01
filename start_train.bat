@@ -1,0 +1,1 @@
+python model_main_tf2.py --model_dir=custom_models/ssd_mobilenet_v2_phone_numbers --pipeline_config_path=custom_models/ssd_mobilenet_v2_phone_numbers/pipeline.config

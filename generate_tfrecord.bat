@@ -1,0 +1,2 @@
+python generate_tfrecord.py --csv_input=annotations/train_labels.csv --output_path=annotations/train.record --image_dir=images/train --labels_path=annotations/object-detection.pbtxt
+python generate_tfrecord.py --csv_input=annotations/test_labels.csv --output_path=annotations/test.record --image_dir=images/test --labels_path=annotations/object-detection.pbtxt

@@ -1,0 +1,1 @@
+python exporter_main_v2.py --input_type=image_tensor --pipeline_config_path=custom_models\ssd_mobilenet_v2_phone_numbers\pipeline.config --trained_checkpoint_dir=custom_models\ssd_mobilenet_v2_phone_numbers --output_directory=exported_models\ssd_mobilenet_v2_phone_numbers
