@@ -17,8 +17,9 @@ PATH_TO_LABELS = 'annotations/object-detection.pbtxt'
 TEST_IMAGE_PATHS = sorted(list(pathlib.Path('images/test').glob("*.jp*g")))
 IMAGE_WIDTH = 640
 IMAGE_HEIGHT = 640
-DETECTION_THRESHOLD = 0.5
+DETECTION_THRESHOLD = 0.9
 BOX_COORDINATE_CORRECTION = 10
+AREA_THRESHOLD = 100
 
 # patch tf1 compatibility and gfile
 utils_ops.tf = tf.compat.v1
@@ -80,10 +81,13 @@ def get_best_box(detection_boxes: np.array,
     best_score_index = np.argmax(detection_scores)
     if detection_scores[best_score_index] > DETECTION_THRESHOLD:
         y_min, x_min, y_max, x_max = detection_boxes[best_score_index]
-        start_point = (round(x_min*IMAGE_WIDTH) - BOX_COORDINATE_CORRECTION,
-                       round(y_min*IMAGE_HEIGHT - BOX_COORDINATE_CORRECTION))
-        end_point = (round(x_max*IMAGE_WIDTH) + BOX_COORDINATE_CORRECTION,
-                     round(y_max*IMAGE_HEIGHT + BOX_COORDINATE_CORRECTION))
-        return start_point, end_point
-    else:
-        return (-1, -1), (-1, -1)
+        x_min_real = round(x_min*IMAGE_WIDTH) - BOX_COORDINATE_CORRECTION
+        y_min_real = round(y_min*IMAGE_HEIGHT) - BOX_COORDINATE_CORRECTION
+        x_max_real = round(x_max*IMAGE_WIDTH) + BOX_COORDINATE_CORRECTION
+        y_max_real = round(y_max*IMAGE_HEIGHT) + BOX_COORDINATE_CORRECTION
+        area = (x_max_real - x_min_real)*(y_max_real - y_min_real)
+        if area > AREA_THRESHOLD:
+            start_point = (x_min_real, y_min_real)
+            end_point = (x_max_real, y_max_real)
+            return start_point, end_point
+    return (-1, -1), (-1, -1)
