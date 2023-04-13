@@ -33,4 +33,4 @@ python exporter_main_v2.py --input_type=image_tensor --pipeline_config_path=cust
 Пример локализации телефонного номера можно увидеть, запустив detection_test.ipynb
 ![image](https://user-images.githubusercontent.com/88054444/229306511-326845ca-5cf0-412c-addd-708a52a330cf.png)
 
-TODO: распознавание отдельных цифр номера для получения его в виде строки
+TODO: распознавание отдельных цифр номера для получения его в виде строки (сделано в версии 1.1)
