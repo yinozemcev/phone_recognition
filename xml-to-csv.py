@@ -31,4 +31,3 @@ if __name__ == '__main__':
         image_path = os.path.join(os.getcwd(), f'images/{directory}')
         xml_df = xml_to_csv(image_path)
         xml_df.to_csv(f'annotations/{directory}_labels.csv', index=None)
-        print('Successfully converted xml to csv.')
